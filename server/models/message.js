@@ -1,23 +1,21 @@
 export default (sequelize, DataTypes) => {
-  const Message = sequelize.define(
-    'message',
-    {
-      text: DataTypes.STRING,
-    },
-    { underscored: true },
-  );
+  const Message = sequelize.define('message', {
+    text:{
+      type: DataTypes.STRING,
+    
+    }
+  });
 
+  //1:M
   Message.associate = (models) => {
-    // 1:M
     Message.belongsTo(models.Channel, {
-      foreignKey: {
-        name: 'channelId',
-        field: 'channel_id',
-      },
-    });
+      foreignKey: 'channelID',
+    })
+
     Message.belongsTo(models.User, {
-      foreignKey: 'user_id',
-    });
+      foreignKey: 'userID',
+    })
+
   };
 
   return Message;
