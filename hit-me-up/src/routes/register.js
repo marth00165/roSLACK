@@ -7,7 +7,10 @@ import {graphql} from 'react-apollo';
   state = {
     username: '',
     email: '',
-    password: ''
+    password: '',
+    usernameErr: '',
+    passwordErr: '',
+    emailErr: '',
   };
 
   onChange = e => {
@@ -19,21 +22,58 @@ import {graphql} from 'react-apollo';
   };
 
   onClick = async() => {
+  const {username, email, password} = this.state;
   const response = await this.props.mutate({
-      variables: this.state,
+      variables: {username,email,password},
     });
-    console.log(response)
+
+    const {ok, errors} = response.data.register;
+    if (ok) {
+      this.props.history.push('/')
+    } else {
+      const err = {};
+      errors.forEach( ({path, message}) => {
+        err[`${path}Err`] = message;
+        //err['passwordErr'] = 'too long.. '
+      });
+      this.setState(err)
+
+    }
+    
   };
 
 
   render(){
-    const {username,email,password} = this.state;
+    const {username,email,password, usernameErr, emailErr, passwordErr} = this.state;
     return (
       <Container text>
         <Header as='h2'>Register</Header>
-        <Input name = "username" onChange={this.onChange} value= {username} fluid placeholder='Username' />
-        <Input name = "email" onChange={this.onChange} value= {email} fluid placeholder='Email' />
-        <Input name = "password" onChange={this.onChange} value= {password} type="password" fluid placeholder='Password' />
+        <Input
+        error = {!!usernameErr}
+        name = "username"
+        onChange={this.onChange}
+        value= {username}
+        fluid
+        placeholder='Username'
+        />
+
+        <Input
+        error = {!!emailErr}
+        name = "email"
+        onChange={this.onChange}
+        value= {email}
+        fluid
+        placeholder='Email'
+        />
+        <Input
+        error = {!!passwordErr}
+        name = "password"
+        onChange={this.onChange}
+        value= {password}
+        type="password"
+        fluid
+        placeholder='Password'
+         />
         <Button onClick = {this.onClick} primary>Register</Button>
       </Container>
 
@@ -43,7 +83,13 @@ import {graphql} from 'react-apollo';
 }
 const registerMutation = gql `
 mutation($username: String!, $email: String!, $password: String!) {
-register(username: $username, email: $email, password: $password )
+register(username: $username, email: $email, password: $password ){
+  ok
+  errors {
+    path
+    message
+  }
+}
 }
 `;
 
