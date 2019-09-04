@@ -1,5 +1,5 @@
 import React from "react";
-import {Input, Container, Header, Button} from 'semantic-ui-react';
+import {Input, Container, Header, Button, Message} from 'semantic-ui-react';
 import { gql } from "apollo-boost";
 import {graphql} from 'react-apollo';
 
@@ -14,6 +14,7 @@ import {graphql} from 'react-apollo';
   };
 
   onChange = e => {
+
     const {name, value} = e.target;
     //name = "email"
     this.setState({
@@ -22,6 +23,11 @@ import {graphql} from 'react-apollo';
   };
 
   onClick = async() => {
+  this.setState({
+    usernameErr: '',
+    emailErr: '',
+    passwordErr: ''
+  })
   const {username, email, password} = this.state;
   const response = await this.props.mutate({
       variables: {username,email,password},
@@ -39,13 +45,28 @@ import {graphql} from 'react-apollo';
       this.setState(err)
 
     }
-    
+
   };
 
 
   render(){
     const {username,email,password, usernameErr, emailErr, passwordErr} = this.state;
+    const errorList = [];
+
+    if(usernameErr){
+      errorList.push(usernameErr)
+    }
+
+    if(emailErr){
+      errorList.push(emailErr)
+    }
+
+    if(passwordErr){
+      errorList.push(passwordErr)
+    }
+
     return (
+
       <Container text>
         <Header as='h2'>Register</Header>
         <Input
@@ -75,6 +96,11 @@ import {graphql} from 'react-apollo';
         placeholder='Password'
          />
         <Button onClick = {this.onClick} primary>Register</Button>
+        {(usernameErr || emailErr || passwordErr) ? <Message
+        error
+        header='There was some errors with your submission'
+        list={errorList}
+  />: null}
       </Container>
 
     )
