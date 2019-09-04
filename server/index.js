@@ -8,6 +8,9 @@ import models from "./models"
 const types = fileLoader(path.join(__dirname, './schema'));
 const resolversArray = fileLoader(path.join(__dirname, './resolvers'));
 
+const SECRET = 'madaraUchihaWasInnocent';
+const SECRET2 = 'El_curry'
+
 const typeDefs = mergeTypes(types);
 
 
@@ -44,6 +47,8 @@ const server = new ApolloServer({
     user: {
       id: 1,
     },
+    SECRET,
+    SECRET2,
 
 
   }
