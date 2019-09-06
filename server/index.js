@@ -60,16 +60,13 @@ const schema = makeExecutableSchema({
 
 const graphqlEndpoint = '/graphql';
 
-
-
-
-
-
 const server = new ApolloServer({
   schema,
-  context: ({req}) => {
-    user: req.user,
+  context:{
     models,
+    user: {
+      id: 1
+    },
     SECRET,
     SECRET2
   }
