@@ -10,10 +10,9 @@ import client from './apollo';
 
 
 const App = (
-<ApolloProvider client = {client}>
-  <Routes />
-</ApolloProvider>
-
+  <ApolloProvider client = {client}>
+    <Routes />
+  </ApolloProvider>
 );
 
 

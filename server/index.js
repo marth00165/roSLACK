@@ -1,5 +1,5 @@
-const express = require('express');
-const { ApolloServer, gql} = require('apollo-server-express');
+import express from 'express';
+import { ApolloServer, gql} from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import path from 'path';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
@@ -62,14 +62,15 @@ const graphqlEndpoint = '/graphql';
 
 const server = new ApolloServer({
   schema,
-  context:{
+  context:({req}) => {
+  return {
+      user: req.user,
+     SECRET,
+     SECRET2,
     models,
-    user: {
-      id: 1
-    },
-    SECRET,
-    SECRET2
   }
+}
+
 });
 server.applyMiddleware({ app });
 

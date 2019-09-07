@@ -21,6 +21,7 @@ const middlewareLink = setContext(() => ({
 const afterwareLink = new ApolloLink((operation, forward) =>
   forward(operation).map((response) => {
     const { response: { headers } } = operation.getContext();
+
     if (headers) {
       const token = headers.get('x-token');
       const refreshToken = headers.get('x-refresh-token');
@@ -37,7 +38,9 @@ const afterwareLink = new ApolloLink((operation, forward) =>
     return response;
   }));
 
-const httpLinkWithMiddleware = afterwareLink.concat(middlewareLink.concat(httpLink));
+const httpLinkWithMiddleware = afterwareLink.concat(
+  middlewareLink.concat(httpLink)
+);
 
 // export const wsLink = new WebSocketLink({
 //   uri: `ws://${process.env.REACT_APP_SERVER_URL}/subscriptions`,
@@ -51,16 +54,17 @@ const httpLinkWithMiddleware = afterwareLink.concat(middlewareLink.concat(httpLi
 //   },
 // });
 
-const link = split(
-  ({ query }) => {
-    const { kind, operation } = getMainDefinition(query);
-    return kind === 'OperationDefinition' && operation === 'subscription';
-  },
-  httpLinkWithMiddleware,
-);
+// const link = split(
+//   ({ query }) => {
+//     const { kind, operation } = getMainDefinition(query);
+//     return kind === 'OperationDefinition' && operation === 'subscription';
+//   },
+//
+//   httpLinkWithMiddleware,
+// );
 
 const client = new ApolloClient({
-  link: link,
+  link: httpLinkWithMiddleware,
   cache: new InMemoryCache(),
 });
 

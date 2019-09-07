@@ -1,6 +1,9 @@
 import formatErrors from '../formatErrors'
 
 export default {
+  Query: {
+    allTeams: (parent, args, { models }) => models.Team.findAll(),
+  },
   Mutation: {
     createTeam: async (parent, args, {models, user}) => {
       try {
