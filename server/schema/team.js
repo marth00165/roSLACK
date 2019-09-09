@@ -6,9 +6,6 @@ members: [User!]!
 channels: [Channel!]!
 }
 
-type Query {
-  allTeams: [Team!]!
-}
 
 type CreateTeamResponse {
   ok: Boolean!
