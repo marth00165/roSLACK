@@ -21,7 +21,7 @@ class CreateTeam extends React.Component {
     let response = null;
 
     try {
-      reponse = await this.props.mutate({
+      response = await this.props.mutate({
        variables: { name },
      });
    } catch (err) {
@@ -30,7 +30,7 @@ class CreateTeam extends React.Component {
    }
 
 
-    console.log(response);
+
 
     const {
       ok, errors,
