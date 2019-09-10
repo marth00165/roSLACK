@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header'
-import Messages from '../components/Messages'
 import InputDiv from '../components/InputDiv'
 import Sidebar from '../containers/Sidebar'
 import MessageContainer from '../containers/MessageContainer';
