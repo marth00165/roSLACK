@@ -13,10 +13,12 @@ import findIndex from 'lodash/findIndex';
 
 
 
-const ViewTeam = ({ data: { loading, allTeams }, match: { params: { team_id, channel_id } } }) => {
+const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: { team_id, channel_id } } }) => {
  if (loading) {
    return null;
  }
+
+ const teams = [...allTeams, ...inviteTeams];
 
  if (!allTeams.length) {
     return <Redirect to="/create-team" />;
@@ -24,11 +26,12 @@ const ViewTeam = ({ data: { loading, allTeams }, match: { params: { team_id, cha
 
   const teamIdInteger = parseInt(team_id, 10);
    const teamIdx = teamIdInteger ? findIndex(allTeams, ['id', teamIdInteger]) : 0;
-   const team = allTeams[teamIdx];
+   const team = teamIdx === -1 ? teams[0] : teams[teamIdx];
+
 
    const channelIdInteger = parseInt(channel_id, 10);
    const channelIdx = channelIdInteger ? findIndex(team.channels, ['id', channelIdInteger]) : 0;
-   const channel = team.channels[channelIdx];
+   const channel = channelIdx === -1 ? team.channels[0] : team.channels[channelIdx];
 
    return (
       <AppLayout>
