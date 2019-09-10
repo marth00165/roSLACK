@@ -6,15 +6,17 @@ import {gql} from 'apollo-boost';
 import Messages from '../components/Messages';
 
 const MessageContainer = ({ data: { loading, messages } }) =>
+
   (loading ? null : (
     <Messages>
       <Comment.Group>
         {messages.map(m => (
+          
           <Comment key={`${m.id}-message`}>
             <Comment.Content>
               <Comment.Author as="a">{m.user.username}</Comment.Author>
               <Comment.Metadata>
-                <div>{m.created_at}</div>
+                <div>{Date(m.created_at)}</div>
               </Comment.Metadata>
               <Comment.Text>{m.text}</Comment.Text>
               <Comment.Actions>
