@@ -17,7 +17,7 @@ const AddChannelModal = ({
   <Modal open={open} onClose={onClose}>
     <Modal.Header>Add Channel</Modal.Header>
     <Modal.Content>
-      <Form>
+      <Form >
         <Form.Field>
           <Input
             value={values.name}
@@ -32,7 +32,7 @@ const AddChannelModal = ({
           <Button disabled={isSubmitting} fluid onClick={onClose}>
             Cancel
           </Button>
-          <Button type="button" disabled={isSubmitting} onClick={handleSubmit} fluid>
+          <Button type="Submit" disabled={isSubmitting} onClick={handleSubmit} fluid>
             Create Channel
           </Button>
         </Form.Group>
@@ -43,7 +43,12 @@ const AddChannelModal = ({
 
 const createChannelMutation = gql`
   mutation($team_id: Int!, $name: String!) {
-    createChannel(team_id: $team_id, name: $name)
+    createChannel(team_id: $team_id, name: $name){
+      ok
+      channel {
+        name
+      }
+    }
   }
 `;
 

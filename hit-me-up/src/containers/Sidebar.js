@@ -33,7 +33,7 @@ class Sidebar extends React.Component {
     try {
       const token = localStorage.getItem('token');
       const { user } = decode(token);
-
+      // eslint-disable-next-line prefer-destructuring
       username = user.username;
     } catch (err) {}
 
@@ -54,7 +54,7 @@ class Sidebar extends React.Component {
         onAddChannelClick={this.handleAddChannelClick}
       />,
       <AddChannelModal
-        team_id={currentTeamId}
+        team_id={team.id}
         onClose={this.handleCloseAddChannelModal}
         open={this.state.openAddChannelModal}
         key="sidebar-add-channel-modal"
