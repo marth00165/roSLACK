@@ -10,7 +10,7 @@ export default {
         return true;
       }
         catch (err) {
-          console.log(err)
+          console.log(err, models)
           return false;
       }
     }
