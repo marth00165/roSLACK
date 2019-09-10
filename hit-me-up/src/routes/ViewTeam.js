@@ -1,6 +1,5 @@
 import React from 'react';
-import Channels from '../components/Channels'
-import Teams from '../components/Teams'
+
 import Header from '../components/Header'
 import Messages from '../components/Messages'
 import InputDiv from '../components/InputDiv'
@@ -11,9 +10,9 @@ import AppLayout from '../components/AppLayout'
 
 
 
-export default () => (
+ const ViewTeam = ({match: {params}}) => (
   <AppLayout>
-  <Sidebar currentTeamId={1} />
+  <Sidebar currentTeamId={params.team_id} />
   <Header channelName= "General"/>
   <Messages>
     <ul>
@@ -24,3 +23,5 @@ export default () => (
   <InputDiv channelName= "General"/>
 </AppLayout>
 )
+
+export default ViewTeam

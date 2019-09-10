@@ -5,7 +5,7 @@ export default (sequelize, DataTypes) => {
       public: DataTypes.BOOLEAN,
     }
   },
-  
+
 );
 
   //1:M
