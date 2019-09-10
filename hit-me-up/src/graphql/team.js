@@ -1,4 +1,4 @@
-import {gql} from 'apollo-boost';
+import gql from 'graphql-tag';
 
 export const allTeamsQuery = gql`
   {
@@ -10,5 +10,15 @@ export const allTeamsQuery = gql`
         name
       }
     }
+    inviteTeams {
+      id
+      name
+      channels {
+        id
+        name
+      }
+    }
   }
 `;
+
+export const idk = {};

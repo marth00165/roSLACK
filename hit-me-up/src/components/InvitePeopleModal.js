@@ -20,7 +20,7 @@ const InvitePeopleModal = ({
   <Modal open={open} onClose={onClose}>
     <Modal.Header>Add People to your Team</Modal.Header>
     <Modal.Content>
-      <Form>
+      <Form onSubmit= {handleSubmit}>
         <Form.Field>
           <Input
             value={values.name}
@@ -33,10 +33,10 @@ const InvitePeopleModal = ({
         </Form.Field>
         {touched.email && errors.email ? errors.email[0] : null}
         <Form.Group widths="equal">
-          <Button disabled={isSubmitting} fluid onClick={onClose}>
+          <Button type="Button" disabled={isSubmitting} fluid onClick={onClose}>
             Cancel
           </Button>
-          <Button disabled={isSubmitting} onClick={handleSubmit} fluid>
+          <Button type="Button" disabled={isSubmitting} onClick={handleSubmit} fluid>
             Add User
           </Button>
         </Form.Group>
