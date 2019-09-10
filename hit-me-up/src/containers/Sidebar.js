@@ -53,7 +53,7 @@ export default class Sidebar extends React.Component {
          username={username}
          team_id={team.id}
          channels={team.channels}
-         users={[{ id: 1, name: 'slackbot' }, { id: 2, name: 'user1' }]}
+         users={[{ id: 1, name: 'jawnBot' }, { id: 2, name: 'user1' }]}
          onAddChannelClick={this.handleAddChannelClick}
          onInvitePeopleClick={this.handleInvitePeopleClick}
        />,
