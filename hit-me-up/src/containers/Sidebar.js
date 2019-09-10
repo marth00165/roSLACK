@@ -1,14 +1,8 @@
 import React from 'react';
-
-import { graphql } from 'react-apollo';
-import findIndex from 'lodash/findIndex';
 import decode from 'jwt-decode';
 import Channels from '../components/Channels';
 import Teams from '../components/Teams';
-import {allTeamsQuery} from '../graphql/team'
 import InvitePeopleModal from '../components/InvitePeopleModal';
-
-
 import AddChannelModal from '../components/AddChannelModal';
 
 export default class Sidebar extends React.Component {

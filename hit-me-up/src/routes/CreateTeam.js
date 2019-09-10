@@ -32,7 +32,7 @@ class CreateTeam extends React.Component {
 
 
 
-    const {ok, errors, id} =  response.data.createTeam;
+    const {ok, errors} =  response.data.createTeam;
     console.log(ok)
 
 
