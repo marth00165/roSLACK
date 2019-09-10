@@ -32,12 +32,12 @@ class CreateTeam extends React.Component {
 
 
 
-    const {
-      ok, errors,
-    } = response.data.createTeam;
+    const {ok, errors, id} =  response.data.createTeam;
+    console.log(ok)
+
 
     if (ok) {
-      this.props.history.push('/');
+       (this.props.history.push(`/view-team`))
     } else {
       const err = {};
       errors.forEach(({ path, message }) => {
