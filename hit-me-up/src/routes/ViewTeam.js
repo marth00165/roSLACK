@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import Messages from '../components/Messages'
 import InputDiv from '../components/InputDiv'
 import Sidebar from '../containers/Sidebar'
+import MessageContainer from '../containers/MessageContainer';
 import AppLayout from '../components/AppLayout'
 import {allTeamsQuery} from '../graphql/team'
 import findIndex from 'lodash/findIndex';
@@ -43,15 +44,8 @@ const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: {
         team={team}
       />
       {channel && <Header channelName={channel.name} />}
-      {channel && (
-       <Messages channel_id={channel.id}>
-         <ul className="message-list">
-           <li />
-           <li />
-         </ul>
-       </Messages>
-     )}
-      {channel && <InputDiv channelName={channel.name} />}
+      {channel && <MessageContainer channel_id={channel.id} />}
+      {channel && <InputDiv channelName={channel.name} channel_id={channel.id} />}
     </AppLayout>
   )
 }
