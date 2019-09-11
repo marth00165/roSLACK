@@ -8,7 +8,7 @@ export const allTeamsQuery = gql`
       owner
       channels {
         id
-        name
+        name  
       }
     }
     inviteTeams {
