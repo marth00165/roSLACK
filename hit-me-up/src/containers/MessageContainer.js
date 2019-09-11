@@ -19,7 +19,7 @@ const newChannelMessageSubscription = gql`
 `;
 
 class MessageContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
      this.unsubscribe = this.subscribe(this.props.channel_id);
   }
 

@@ -27,7 +27,7 @@ export default class Sidebar extends React.Component {
 
   render() {
      const { teams, team } = this.props;
-    
+
      const { openInvitePeopleModal, openAddChannelModal } = this.state;
 
      let username = '';

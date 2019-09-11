@@ -1,20 +1,16 @@
 import React from 'react';
-import { gql } from "apollo-boost";
-import { graphql } from 'react-apollo';
 
 
- const Home = ({data: {allUsers = []}}) => {
-   console.log(allUsers)
-   return (allUsers.map(user =>  <h1 key={user.id}>{user.email}</h1>));
+class Home extends React.Component {
+  render(){
+    return (
+      <div>
+      hello
+      </div>
+    )
+  }
 }
 
-const allUsersQuery = gql `
-   {
-    allUsers {
-      id
-      email
-    }
-  }
-`;
 
-export default graphql(allUsersQuery)(Home);
+
+export default (Home);
