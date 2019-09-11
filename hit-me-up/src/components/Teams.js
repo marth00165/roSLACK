@@ -37,7 +37,7 @@ const TeamListItem = styled.li
   }
 `;
 
-const team = ({ id, letter }) => <Link to={`/view-team/${id}`}><TeamListItem key={`team-${id}`}>{letter}</TeamListItem></Link>;
+const team = ({ id, letter }) => <Link key={id} to={`/view-team/${id}`}><TeamListItem key={`team-${id}`}>{letter}</TeamListItem></Link>;
 
 
 export default ({teams}) => (

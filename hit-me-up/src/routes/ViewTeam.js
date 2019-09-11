@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
-import { Redirect } from 'react-router-dom';
 import Header from '../components/Header'
 import InputDiv from '../components/InputDiv'
 import Sidebar from '../containers/Sidebar'
@@ -20,12 +19,11 @@ const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: {
 
  const teams = [...allTeams, ...inviteTeams];
 
- if (!allTeams.length) {
-    return <Redirect to="/create-team" />;
-  }
+
+
 
   const teamIdInteger = parseInt(team_id, 10);
-   const teamIdx = teamIdInteger ? findIndex(allTeams, ['id', teamIdInteger]) : 0;
+   const teamIdx = teamIdInteger ? findIndex(teams, ['id', teamIdInteger]) : 0;
    const team = teamIdx === -1 ? teams[0] : teams[teamIdx];
 
 
@@ -36,7 +34,7 @@ const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: {
    return (
       <AppLayout>
       <Sidebar
-        teams={allTeams.map(t => ({
+        teams={teams.map(t => ({
           id: t.id,
           letter: t.name.charAt(0).toUpperCase(),
         }))}
