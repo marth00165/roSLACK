@@ -43,7 +43,7 @@ const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: {
       />
       {channel && <Header channelName={channel.name} />}
       {channel && <MessageContainer channel_id={channel.id} />}
-      {channel && <InputDiv channelName={channel.name} channel_id={channel.id} />}
+      {channel && <InputDiv onChange={()=> console.log("yo")}channelName={channel.name} channel_id={channel.id} />}
     </AppLayout>
   )
 }
