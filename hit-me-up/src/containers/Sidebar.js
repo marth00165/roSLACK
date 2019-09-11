@@ -9,6 +9,7 @@ export default class Sidebar extends React.Component {
   state = {
      openAddChannelModal: false,
      openInvitePeopleModal: false,
+
    };
 
    toggleAddChannelModal = (e) => {
@@ -28,9 +29,8 @@ export default class Sidebar extends React.Component {
   render() {
      const { teams, team } = this.props;
 
-     console.log(team)
-
      const { openInvitePeopleModal, openAddChannelModal } = this.state;
+
 
      let username = '';
      let isOwner = false;

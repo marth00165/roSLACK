@@ -60,18 +60,29 @@ export default class Channels extends React.Component
     searchChannels: this.props.channels
   }
 
+
+
   updateSearch = (ev) => {
     let search = ev.target.value
 
+    let newChannels = this.props.channels.filter(
+      (channel) => {
+        return channel.name.indexOf(search) != -1;
+      }
+    )
 
     this.setState({
-      searchChannels: this.props.channels.filter(
-        (channel) => {
-          return channel.name.indexOf(search) != -1;
-        }
-      )
+      searchChannels: newChannels
     })
 }
+
+onBlur = () =>{
+  this.setState({
+    searchChannels: this.props.channels
+  })
+}
+
+
 
 
 
@@ -86,7 +97,7 @@ render(){
         <TeamNameHeader>{teamName}</TeamNameHeader>
         {username}
         <br/>
-        <Input onChange ={this.updateSearch} icon='users' iconPosition='left' placeholder='Jump To...' />
+        <Input onBlur={this.onBlur} onChange ={this.updateSearch} icon='users' iconPosition='left' placeholder='Jump To...' />
       </PushLeft>
       <div>
         <SideBarList>

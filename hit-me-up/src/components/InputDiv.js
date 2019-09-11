@@ -4,8 +4,13 @@ import { Input } from 'semantic-ui-react';
 import { withFormik } from 'formik';
 import {flowRight as compose} from 'lodash'
 import {gql} from 'apollo-boost';
+import decode from 'jwt-decode';
 import { graphql } from 'react-apollo';
 
+
+const token = localStorage.getItem('token');
+const { user } = decode(token);
+const username = user.username;
 
 const SendMessageWrapper = styled.div`
   grid-column: 3;
@@ -31,6 +36,11 @@ const InputDiv = ({
     onKeyDown={(e) => {
       if (e.keyCode === ENTER_KEY && !isSubmitting ){
         handleSubmit(e);
+      }
+      else {
+
+        console.log(username+ " is typing...")
+
       }
     }}
     onChange={handleChange}

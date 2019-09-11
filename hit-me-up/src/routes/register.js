@@ -68,7 +68,7 @@ class Register extends React.Component {
     }
 
     return (
-    <body style={{display: "flex", justifyContent:"center", alignItems:"center", width: "100vw", height: "100vh", backgroundImage:"url(https://wallpapercave.com/wp/Yuj5g8L.jpg)", backgroundSize:"cover"}}>
+    <body style={{display: "flex", justifyContent:"center", alignItems:"center", width: "100vw", height: "100vh", backgroundImage:"url(https://media2.giphy.com/media/BHNfhgU63qrks/giphy.gif)", backgroundSize:"cover"}}>
       <Container style={{border:"2px solid grey", width:"400px", opacity: "0.8", padding:"20px", backgroundColor: "white"}}  text>
         <Header as="h2">Register</Header>
         <Form>
@@ -95,6 +95,7 @@ class Register extends React.Component {
             />
           </Form.Field>
           <Button primary onClick={this.onSubmit}>Submit</Button>
+          <Button primary type="button" onClick={() => this.props.history.push("/login")}>Login</Button>
         </Form>
         {errorList.length ? (
           <Message error header="There was some errors with your submission" list={errorList} />
