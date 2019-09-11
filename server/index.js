@@ -7,6 +7,9 @@ import cors from 'cors';
 import models from "./models"
 import jwt from "jsonwebtoken"
 import {refreshTokens} from "./auth"
+import { execute, subscribe } from 'graphql';
+import { createServer } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
 
 const types = fileLoader(path.join(__dirname, './schema'));
 const resolversArray = fileLoader(path.join(__dirname, './resolvers'));
@@ -74,8 +77,19 @@ const server = new ApolloServer({
 });
 server.applyMiddleware({ app });
 
+const wsServer = createServer(app)
+
 models.sequelize.sync({}).then(() => {
-  app.listen({ port: PORT }, () =>
-    console.log(`🚀 Server ready at http://localhost:8081${graphqlEndpoint}`)
-  )
-})
+  wsServer.listen(8081, ()=>{
+    new SubscriptionServer({
+      execute,
+      subscribe,
+      schema
+    },
+      {
+        server: wsServer,
+        path: '/subscriptions'
+      },
+    );
+  });
+});

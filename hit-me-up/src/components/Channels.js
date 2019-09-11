@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
-const ChannelWrapper = styled.div
-` grid-column: 2;
+const ChannelWrapper = styled.div`
+  grid-column: 2;
   grid-row: 1/4;
   background-color: #313638
   color: #EEF0F2;
@@ -41,7 +41,7 @@ const Bubble = ({ on = true }) => (on ? <Green>●</Green> : '○');
 
 const channel = ({ id, name }, team_id) => (
   <Link key={`channel-${id}`} to={`/view-team/${team_id}/${id}`}>
-    <SideBarListItem># {name}</SideBarListItem>
+    <SideBarListItem key={`channel-${id}`}># {name}</SideBarListItem>
   </Link>
 );
 
