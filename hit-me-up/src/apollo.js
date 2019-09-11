@@ -52,7 +52,11 @@ const wsLink = new WebSocketLink({
   uri: `ws://localhost:8081/subscriptions`,
   options: {
     reconnect: true
-  }
+  },
+  connectionParams: {
+        token: localStorage.getItem('token'),
+        refreshToken: localStorage.getItem('refreshToken')
+    },
 });
 
 //using split to decide when to use the wslink or the middleandafterwarelink

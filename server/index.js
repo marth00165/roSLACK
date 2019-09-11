@@ -39,6 +39,7 @@ const resolvers = mergeResolvers(resolversArray);
 
 const PORT = 8081;
 const graphqlEndpoint = '/graphql';
+const subscriptionEndpoint = 'ws://localhost:8081/subscriptions'
 const app = express();
 app.use(cors('*'))
 
@@ -65,6 +66,7 @@ const addUser = async (req, res, next) => {
 };
 //adding the jwt auth to the server
 app.use(addUser);
+
 
 
 
@@ -105,16 +107,44 @@ server with websockets to start subscriptions to send live messages
 */
 models.sequelize.sync({}).then(() => {
   wsServer.listen(PORT, ()=>{
-    new SubscriptionServer({
-      execute,
-      subscribe,
-      schema
-    },
+    new SubscriptionServer(
       {
-        server: wsServer,
-        path: '/subscriptions'
-      },
-    );
+          execute,
+          subscribe,
+          schema,
+        //   onConnect: async ({ token, refreshToken }, webSocket) => {
+        //     console.log(connectionParams)
+        //     if (token && refreshToken) {
+        //       console.log(token)
+        //       let user = null;
+        //       try {
+        //         const payload = jwt.verify(token, SECRET);
+        //         user = payload.user;
+        //       } catch (err) {
+        //         const newTokens = await refreshTokens(token, refreshToken, models, SECRET, SECRET2);
+        //         user = newTokens.user;
+        //       }
+        //       if (!user) {
+        //         throw new Error('Invalid auth tokens');
+        //       }
+        //
+        //       // const member = await models.Member.findOne({ where: { teamId: 1, userId: user.id } });
+        //
+        //       // if (!member) {
+        //       //   throw new Error('Missing auth tokens!');
+        //       // }
+        //
+        //       return true;
+        //     }
+        //
+        //     throw new Error('Missing auth tokens!');
+        //   },
+        },
+        {
+          server: wsServer,
+          path: '/subscriptions',
+        },
+      );
+    });
      console.log(`🚀 Server ready at http://localhost:8081${server.graphqlPath}`)
   });
-});
