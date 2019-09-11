@@ -2,9 +2,10 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { ApolloLink} from 'apollo-link';
-import { HttpLink } from 'apollo-link-http';
+import { HttpLink} from 'apollo-link-http';
 // import createFileLink from './createFileLink';
 import { split } from 'apollo-link';
+
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 

@@ -11,6 +11,16 @@ import { execute, subscribe } from 'graphql';
 import { createServer } from 'http';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 
+/*
+ok first I get all my "types" or fetch requests basically and split them up into their own individual folders
+so there isn't like a huge chunk queries and mutations (basically GET and POST) in one file and its all messy
+so i use this fileLoader helper function which my friend Ben Ward (@benawad97) told me can merge all the files
+together so got that from graphql documentation too.. anyway i join all of them and create resolvers which is the
+second half to a type is a resolver any do the same and split those up this was just done for organisation purpose
+this isn't how you have to do it
+*/
+
+
 const types = fileLoader(path.join(__dirname, './schema'));
 const resolversArray = fileLoader(path.join(__dirname, './resolvers'));
 
@@ -21,14 +31,18 @@ const typeDefs = mergeTypes(types);
 
 
 
+
 const resolvers = mergeResolvers(resolversArray);
 
 
-
+// creating my express server here and giving it cors permissions
 
 const PORT = 8081;
+const graphqlEndpoint = '/graphql';
 const app = express();
 app.use(cors('*'))
+
+//jwt auth token
 
 const addUser = async (req, res, next) => {
   const token = req.headers['x-token'];
@@ -49,20 +63,21 @@ const addUser = async (req, res, next) => {
   }
   next();
 };
-
+//adding the jwt auth to the server
 app.use(addUser);
 
 
 
-
+//creating my schema here with the typeDefs and resolvers from above
 
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
 
-const graphqlEndpoint = '/graphql';
 
+
+// creating ApolloServer and passing schema and jwt token from headers
 const server = new ApolloServer({
   schema,
   context:({req}) => {
@@ -77,8 +92,17 @@ const server = new ApolloServer({
 });
 server.applyMiddleware({ app });
 
+//adding ther ApolloServer graphql to the express server
+
+
+//creating back end websocket server from the express server
 const wsServer = createServer(app)
 
+
+/*
+passing the models through sequelize then using the new
+server with websockets to start subscriptions to send live messages
+*/
 models.sequelize.sync({}).then(() => {
   wsServer.listen(PORT, ()=>{
     new SubscriptionServer({
