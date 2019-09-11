@@ -67,10 +67,16 @@ export default class Channels extends React.Component
     this.setState({
       searchChannels: this.props.channels.filter(
         (channel) => {
-          return channel.name.indexOf(search) != -1;
+          return channel.name.indexOf(search) !== -1;
         }
       )
     })
+}
+
+onBlur = () => {
+  this.setState({
+    searchChannels:this.props.channels
+  })
 }
 
 
@@ -78,7 +84,7 @@ export default class Channels extends React.Component
 
 render(){
 
-  const { teamName, username, channels, users, onAddChannelClick, team_id, onInvitePeopleClick, isOwner } = this.props
+  const { teamName, username,  users, onAddChannelClick, team_id, onInvitePeopleClick, isOwner } = this.props
   const {searchChannels} = this.state
   return (
     <ChannelWrapper>
@@ -86,7 +92,7 @@ render(){
         <TeamNameHeader>{teamName}</TeamNameHeader>
         {username}
         <br/>
-        <Input onChange ={this.updateSearch} icon='users' iconPosition='left' placeholder='Jump To...' />
+        <Input onBlur={this.onBlur} onChange ={this.updateSearch} icon='users' iconPosition='left' placeholder='Jump To...' />
       </PushLeft>
       <div>
         <SideBarList>

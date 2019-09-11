@@ -68,39 +68,40 @@ class Register extends React.Component {
     }
 
     return (
-    <body style={{display: "flex", justifyContent:"center", alignItems:"center", width: "100vw", height: "100vh", backgroundImage:"url(https://wallpapercave.com/wp/Yuj5g8L.jpg)", backgroundSize:"cover"}}>
-      <Container style={{border:"2px solid grey", width:"400px", opacity: "0.8", padding:"20px", backgroundColor: "white"}}  text>
-        <Header as="h2">Register</Header>
-        <Form>
-          <Form.Field error={!!usernameError}>
-            <Input
-              name="username"
-              onChange={this.onChange}
-              value={username}
-              placeholder="Username"
-              fluid
-            />
-          </Form.Field>
-          <Form.Field error={!!emailError}>
-            <Input name="email" onChange={this.onChange} value={email} placeholder="Email" fluid />
-          </Form.Field>
-          <Form.Field error={!!passwordError}>
-            <Input
-              name="password"
-              onChange={this.onChange}
-              value={password}
-              type="password"
-              placeholder="Password"
-              fluid
-            />
-          </Form.Field>
-          <Button primary onClick={this.onSubmit}>Submit</Button>
-        </Form>
-        {errorList.length ? (
-          <Message error header="There was some errors with your submission" list={errorList} />
-        ) : null}
-      </Container>
-    </body>
+      <body style={{display: "flex", justifyContent:"center", alignItems:"center", width: "100vw", height: "100vh", backgroundImage:"url(https://media2.giphy.com/media/BHNfhgU63qrks/giphy.gif)", backgroundSize:"cover"}}>
+       <Container style={{border:"2px solid grey", width:"400px", opacity: "0.8", padding:"20px", backgroundColor: "white"}}  text>
+         <Header as="h2">Register</Header>
+         <Form>
+           <Form.Field error={!!usernameError}>
+             <Input
+               name="username"
+               onChange={this.onChange}
+               value={username}
+               placeholder="Username"
+               fluid
+             />
+           </Form.Field>
+           <Form.Field error={!!emailError}>
+             <Input name="email" onChange={this.onChange} value={email} placeholder="Email" fluid />
+           </Form.Field>
+           <Form.Field error={!!passwordError}>
+             <Input
+               name="password"
+               onChange={this.onChange}
+               value={password}
+               type="password"
+               placeholder="Password"
+               fluid
+             />
+           </Form.Field>
+           <Button primary onClick={this.onSubmit}>Submit</Button>
+           <Button primary type="button" onClick={() => this.props.history.push("/login")}>Login</Button>
+         </Form>
+         {errorList.length ? (
+           <Message error header="There was some errors with your submission" list={errorList} />
+         ) : null}
+       </Container>
+     </body>
     );
   }
 }

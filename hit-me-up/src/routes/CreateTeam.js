@@ -64,7 +64,8 @@ class CreateTeam extends React.Component {
     }
 
     return (
-      <Container text>
+      <body style={{display: "flex", justifyContent:"center", alignItems:"center", width: "100vw", height: "100vh", backgroundImage:"url(https://media2.giphy.com/media/BHNfhgU63qrks/giphy.gif)", backgroundSize:"cover"}}>
+      <Container style={{border:"2px solid grey", width:"400px", opacity: "0.8", padding:"20px", backgroundColor: "white"}}  text>
         <Header as="h2">Create A Team</Header>
         <Form>
           <Form.Field error={!!nameError}>
@@ -77,6 +78,7 @@ class CreateTeam extends React.Component {
           <Message error header="There was some errors with your submission" list={errorList} />
         ) : null}
       </Container>
+    </body>
     );
   }
 }
