@@ -26,6 +26,8 @@ const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: {
    const teamIdx = teamIdInteger ? findIndex(teams, ['id', teamIdInteger]) : 0;
    const team = teamIdx === -1 ? teams[0] : teams[teamIdx];
 
+   console.log(team)
+
 
    const channelIdInteger = parseInt(channel_id, 10);
    const channelIdx = channelIdInteger ? findIndex(team.channels, ['id', channelIdInteger]) : 0;
@@ -47,4 +49,8 @@ const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: {
   )
 }
 
-export default graphql(allTeamsQuery)(ViewTeam);
+export default graphql(allTeamsQuery,{
+  options:{
+    fetchPolicy: 'network-only'
+  }
+})(ViewTeam);
