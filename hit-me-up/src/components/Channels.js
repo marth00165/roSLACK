@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from 'semantic-ui-react';
+import { Input, Icon } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
 const ChannelWrapper = styled.div`
@@ -51,33 +51,63 @@ const user = ({ id, name }) => (
   </SideBarListItem>
 );
 
-export default ({
-  teamName, username, channels, users, onAddChannelClick, team_id, onInvitePeopleClick, isOwner
-}) => (
-  <ChannelWrapper>
-    <PushLeft>
-      <TeamNameHeader>{teamName}</TeamNameHeader>
-      {username}
-    </PushLeft>
-    <div>
-      <SideBarList>
-        <SideBarListHeader>
-          Channels {isOwner && <Icon onClick={onAddChannelClick} name="add circle" />}
-        </SideBarListHeader>
-        {channels.map(c => channel(c, team_id))}
-      </SideBarList>
-    </div>
-    <div>
-      <SideBarList>
-        <SideBarListHeader>Direct Messages</SideBarListHeader>
-        {users.map(user)}
-      </SideBarList>
-    </div>
-    {isOwner &&
-      (<div>
-        <a href="#invite-people" onClick={onInvitePeopleClick}>
-          + Invite People
-        </a>
-    </div>) }
-  </ChannelWrapper>
-);
+
+
+export default class Channels extends React.Component
+{
+
+  state = {
+    searchChannels: this.props.channels
+  }
+
+  updateSearch = (ev) => {
+    let search = ev.target.value
+
+
+    this.setState({
+      searchChannels: this.props.channels.filter(
+        (channel) => {
+          return channel.name.indexOf(search) != -1;
+        }
+      )
+    })
+}
+
+
+
+
+render(){
+
+  const { teamName, username, channels, users, onAddChannelClick, team_id, onInvitePeopleClick, isOwner } = this.props
+  const {searchChannels} = this.state
+  return (
+    <ChannelWrapper>
+      <PushLeft>
+        <TeamNameHeader>{teamName}</TeamNameHeader>
+        {username}
+        <br/>
+        <Input onChange ={this.updateSearch} icon='users' iconPosition='left' placeholder='Jump To...' />
+      </PushLeft>
+      <div>
+        <SideBarList>
+          <SideBarListHeader>
+            Channels {isOwner && <Icon onClick={onAddChannelClick} name="add circle" />}
+          </SideBarListHeader>
+          {searchChannels.map(c => channel(c, team_id))}
+        </SideBarList>
+      </div>
+      <div>
+        <SideBarList>
+          <SideBarListHeader>Direct Messages</SideBarListHeader>
+          {users.map(user)}
+        </SideBarList>
+      </div>
+      {isOwner &&
+        (<div>
+          <a href="#invite-people" onClick={onInvitePeopleClick}>
+            + Invite People
+          </a>
+      </div>) }  </ChannelWrapper>
+    )
+  }
+}

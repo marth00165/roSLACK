@@ -61,7 +61,9 @@ class Login extends React.Component {
     }
 
     return (
-      <Container text>
+  <html lang="en">
+    <body style={{display: "flex", justifyContent:"center", alignItems:"center", width: "100vw", height: "100vh", backgroundImage:"url(https://wallpapercave.com/wp/Yuj5g8L.jpg)", backgroundSize:"cover"}}>
+      <Container style={{border:"2px solid grey", width:"400px", opacity: "0.8", padding:"20px", backgroundColor: "white"}}  text>
         <Header as="h2">Login</Header>
         <Form>
           <Form.Field error={!!emailError}>
@@ -78,11 +80,14 @@ class Login extends React.Component {
             />
           </Form.Field>
           <Button primary onClick={this.onSubmit}>Login</Button>
+          <Button primary type="button" onClick={() => this.props.history.push("/register")}>Register</Button>
         </Form>
         {errorList.length ? (
           <Message error header="There was some errors with your submission" list={errorList} />
         ) : null}
       </Container>
+    </body>
+  </html>
     );
   }
 }
