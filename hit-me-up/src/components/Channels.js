@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
-const ChannelWrapper = styled.div
-` grid-column: 2;
+const ChannelWrapper = styled.div`
+ grid-column: 2;
   grid-row: 1/4;
   background-color: #313638
   color: #EEF0F2;
