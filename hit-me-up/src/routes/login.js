@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import {Message, Form, Button, Input, Container, Header } from 'semantic-ui-react';
 import { graphql } from 'react-apollo';
 import { gql } from "apollo-boost";
+import SiderDemo from '../components/Sider'
 
 class Login extends React.Component {
   constructor(props) {
@@ -84,8 +85,10 @@ class Login extends React.Component {
            {errorList.length ? (
              <Message error header="There was some errors with your submission" list={errorList} />
            ) : null}
-         </Container>
-       </body>
+        </Container>
+      </body>
+
+
     );
   }
 }

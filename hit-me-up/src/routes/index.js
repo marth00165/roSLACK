@@ -5,6 +5,7 @@ import Register from './register';
 import Login from './login';
 import ViewTeam from './ViewTeam';
 import CreateTeam from './CreateTeam'
+import SiderDemo from '../components/Sider'
 import {Redirect, BrowserRouter, Switch, Route} from "react-router-dom";
 
 const isAuthenticated = () => {
@@ -48,7 +49,6 @@ function App() {
         <Route path="/login" exact component = {Login} />
         <PrivateRoute path="/view-team/:team_id?/:channel_id?" exact component = {ViewTeam} />
         <PrivateRoute path="/create-team" exact component = {CreateTeam} />
-
       </Switch>
     </BrowserRouter>
     </div>

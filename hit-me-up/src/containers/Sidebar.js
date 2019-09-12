@@ -5,6 +5,7 @@ import Teams from '../components/Teams';
 import InvitePeopleModal from '../components/InvitePeopleModal';
 import AddChannelModal from '../components/AddChannelModal';
 
+
 export default class Sidebar extends React.Component {
   state = {
      openAddChannelModal: false,

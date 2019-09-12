@@ -73,6 +73,7 @@ class CreateTeam extends React.Component {
           </Form.Field>
 
           <Button primary onClick={this.onSubmit}>Submit</Button>
+          <Button type= "button" primary onClick={()=> this.props.history.push("/view-team")}>Go To Chat!</Button>
         </Form>
         {errorList.length ? (
           <Message error header="There was some errors with your submission" list={errorList} />
