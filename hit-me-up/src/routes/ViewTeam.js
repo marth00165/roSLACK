@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo';
 import Header from '../components/Header'
 import InputDiv from '../components/InputDiv'
 import Sidebar from '../containers/Sidebar'
+import SiderDemo from '../components/Sider'
 import MessageContainer from '../containers/MessageContainer';
 import AppLayout from '../components/AppLayout'
 import {allTeamsQuery} from '../graphql/team'
@@ -33,18 +34,20 @@ const ViewTeam = ({ data: { loading, allTeams, inviteTeams }, match: { params: {
    const channel = channelIdx === -1 ? team.channels[0] : team.channels[channelIdx];
 
    return (
-      <AppLayout>
-      <Sidebar
-        teams={teams.map(t => ({
-          id: t.id,
-          letter: t.name.charAt(0).toUpperCase(),
-        }))}
-        team={team}
-      />
-      {channel && <Header channelName={channel.name} />}
-      {channel && <MessageContainer channel_id={channel.id} />}
-      {channel && <InputDiv channelName={channel.name} channel_id={channel.id} />}
-    </AppLayout>
+    <SiderDemo>
+        <AppLayout>
+        <Sidebar
+          teams={teams.map(t => ({
+            id: t.id,
+            letter: t.name.charAt(0).toUpperCase(),
+          }))}
+          team={team}
+        />
+        {channel && <Header channelName={channel.name} />}
+        {channel && <MessageContainer channel_id={channel.id} />}
+        {channel && <InputDiv channelName={channel.name} channel_id={channel.id} />}
+      </AppLayout>
+    </SiderDemo>
   )
 }
 
